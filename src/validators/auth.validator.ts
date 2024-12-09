@@ -11,6 +11,7 @@ export const validateRegister = [
 
     if (!errors.isEmpty()) {
       res.status(400).send({ message: errors.array()[0].msg });
+      return;
     }
 
     next();
@@ -26,6 +27,7 @@ export const validateLogin = [
 
     if (!errors.isEmpty()) {
       res.status(400).send({ message: errors.array()[0].msg });
+      return;
     }
 
     next();
@@ -40,6 +42,7 @@ export const validateForgotPassword = [
 
     if (!errors.isEmpty()) {
       res.status(400).send({ message: errors.array()[0].msg });
+      return;
     }
 
     next();

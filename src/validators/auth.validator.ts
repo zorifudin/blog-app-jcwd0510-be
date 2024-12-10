@@ -3,7 +3,7 @@ import { body, validationResult } from "express-validator";
 
 export const validateRegister = [
   body("name").notEmpty().withMessage("Name is required").isString(),
-  body("email").notEmpty().withMessage("Email is required").isString(),
+  body("email").notEmpty().withMessage("Email is required").isEmail(),
   body("password").notEmpty().withMessage("Password is required"),
 
   (req: Request, res: Response, next: NextFunction) => {
@@ -19,7 +19,7 @@ export const validateRegister = [
 ];
 
 export const validateLogin = [
-  body("email").notEmpty().withMessage("Email is required").isString(),
+  body("email").notEmpty().withMessage("Email is required").isEmail(),
   body("password").notEmpty().withMessage("Password is required"),
 
   (req: Request, res: Response, next: NextFunction) => {
@@ -35,7 +35,7 @@ export const validateLogin = [
 ];
 
 export const validateForgotPassword = [
-  body("email").notEmpty().withMessage("Email is required").isString(),
+  body("email").notEmpty().withMessage("Email is required").isEmail(),
 
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
@@ -48,6 +48,7 @@ export const validateForgotPassword = [
     next();
   },
 ];
+
 export const validateResetPassword = [
   body("password").notEmpty().withMessage("Password is required"),
 

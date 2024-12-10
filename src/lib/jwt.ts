@@ -6,12 +6,12 @@ export const verifyToken = (
   req: Request,
   res: Response,
   next: NextFunction
-): any => {
+) => {
   const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
     res.status(401).send({
-      message: "Authentication failed, token is missing",
+      message: "Authentication failed, token is required",
     });
     return;
   }
@@ -20,8 +20,10 @@ export const verifyToken = (
     if (err) {
       if (err instanceof TokenExpiredError) {
         res.status(401).send({ message: "Token Expoired" });
+        return;
       } else {
         res.status(401).send({ message: "Invalid Token" });
+        return;
       }
     }
     res.locals.user = payload;
@@ -34,12 +36,12 @@ export const verifyTokenReset = (
   req: Request,
   res: Response,
   next: NextFunction
-): any => {
+) => {
   const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
     res.status(401).send({
-      message: "Authentication failed, token is missing",
+      message: "Authentication failed, token is required",
     });
     return;
   }
@@ -47,7 +49,7 @@ export const verifyTokenReset = (
   verify(token, JWT_SECRET_FORGOT_PASSWORD!, (err, payload) => {
     if (err) {
       if (err instanceof TokenExpiredError) {
-        res.status(401).send({ message: "Token Expoired" });
+        res.status(401).send({ message: "Token Expired" });
         return;
       } else {
         res.status(401).send({ message: "Invalid Token" });

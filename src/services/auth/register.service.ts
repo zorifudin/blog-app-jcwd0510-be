@@ -1,8 +1,6 @@
 import { User } from "@prisma/client";
-import { prisma } from "../../lib/prisma";
-import { error } from "console";
-import { hasSubscribers } from "diagnostics_channel";
 import { hashPassword } from "../../lib/argon";
+import prisma from "../../lib/prisma";
 
 export const registerService = async (body: User) => {
   try {

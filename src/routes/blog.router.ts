@@ -1,17 +1,18 @@
 import { Router } from "express";
-import { getSamplesController } from "../controllers/sample.controller";
 import {
   createBlogsController,
+  getBlogController,
   getBlogsController,
 } from "../controllers/blog.controller";
-import { uploader } from "../lib/multer";
 import { fileFilter } from "../lib/fileFilter";
-import { validateCreateBlog } from "../validators/blog.validator";
 import { verifyToken } from "../lib/jwt";
+import { uploader } from "../lib/multer";
+import { validateCreateBlog } from "../validators/blog.validator";
 
 const router = Router();
 
 router.get("/", getBlogsController);
+router.get("/:id", getBlogController);
 router.post(
   "/",
   verifyToken,

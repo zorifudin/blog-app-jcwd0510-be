@@ -3,6 +3,7 @@ import { getSamplesService } from "../services/sample/get-samples.service";
 import { getBlogsService } from "../services/blog/get-blogs.service";
 import { createBlogService } from "../services/blog/create-blog.service";
 import { getBlogService } from "../services/blog/get-blog.service";
+import { deleteBlogService } from "../services/blog/delete-blog.service";
 
 export const getBlogsController = async (
   req: Request,
@@ -51,6 +52,21 @@ export const createBlogsController = async (
       files.thumbnail?.[0],
       res.locals.user.id
     );
+    res.status(200).send(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteBlogsController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const id = Number(req.params.id);
+    const userId = Number(res.locals.user.id);
+    const result = await deleteBlogService(id, userId);
     res.status(200).send(result);
   } catch (error) {
     next(error);

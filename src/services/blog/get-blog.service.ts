@@ -8,7 +8,7 @@ export const getBlogService = async (id: number) => {
     });
 
     if (!blog) {
-      throw new Error("Invalid blof id");
+      throw new Error("Invalid blog id");
     }
 
     return blog;

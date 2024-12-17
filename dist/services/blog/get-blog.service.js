@@ -21,7 +21,7 @@ const getBlogService = (id) => __awaiter(void 0, void 0, void 0, function* () {
             include: { user: { select: { name: true } } },
         });
         if (!blog) {
-            throw new Error("Invalid blof id");
+            throw new Error("Invalid blog id");
         }
         return blog;
     }

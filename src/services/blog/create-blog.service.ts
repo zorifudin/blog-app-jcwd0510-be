@@ -1,6 +1,5 @@
-import { Blog } from "@prisma/client";
-import prisma from "../../lib/prisma";
 import { cloudinaryUpload } from "../../lib/cloudinary";
+import prisma from "../../lib/prisma";
 
 interface CreateBlogBody {
   title: string;
@@ -18,7 +17,7 @@ export const createBlogService = async (
     const { title } = body;
 
     const blog = await prisma.blog.findFirst({
-      where: { title },
+      where: { title, deletedAt: null },
     });
 
     if (blog) {

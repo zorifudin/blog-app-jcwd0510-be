@@ -8,15 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getBlogService = void 0;
-const prisma_1 = __importDefault(require("../../lib/prisma"));
+const prisma_1 = require("../../lib/prisma");
 const getBlogService = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const blog = yield prisma_1.default.blog.findFirst({
+        const blog = yield prisma_1.prisma.blog.findFirst({
             where: { id },
             include: { user: { select: { name: true } } },
         });

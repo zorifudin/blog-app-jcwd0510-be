@@ -8,15 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSamplesService = void 0;
-const prisma_1 = __importDefault(require("../../lib/prisma"));
+const prisma_1 = require("../../lib/prisma");
 const getSamplesService = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const samples = yield prisma_1.default.sample.findMany();
+        const samples = yield prisma_1.prisma.sample.findMany();
         return samples;
     }
     catch (error) {

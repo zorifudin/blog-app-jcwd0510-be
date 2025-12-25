@@ -7,7 +7,7 @@ import {
 import { sign } from "jsonwebtoken";
 import { transporter } from "../../lib/nodemailer";
 import { link } from "fs";
-import prisma from "../../lib/prisma";
+import { prisma } from "../../lib/prisma";
 
 export const forgotPasswordService = async (body: Pick<User, "email">) => {
   try {

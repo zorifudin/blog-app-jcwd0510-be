@@ -8,12 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getBlogsService = void 0;
-const prisma_1 = __importDefault(require("../../lib/prisma"));
+const prisma_1 = require("../../lib/prisma");
 const getBlogsService = (query) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { page, sortBy, sortOrder, take, search } = query;
@@ -24,14 +21,14 @@ const getBlogsService = (query) => __awaiter(void 0, void 0, void 0, function* (
                 { category: { contains: search, mode: "insensitive" } },
             ];
         }
-        const blogs = yield prisma_1.default.blog.findMany({
+        const blogs = yield prisma_1.prisma.blog.findMany({
             where: whereClause,
             skip: (page - 1) * take,
             take: take,
             orderBy: { [sortBy]: sortOrder },
             include: { user: { select: { name: true } } },
         });
-        const count = yield prisma_1.default.blog.count({ where: whereClause });
+        const count = yield prisma_1.prisma.blog.count({ where: whereClause });
         return {
             data: blogs,
             meta: { page, take, total: count },

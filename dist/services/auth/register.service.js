@@ -8,24 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerService = void 0;
 const argon_1 = require("../../lib/argon");
-const prisma_1 = __importDefault(require("../../lib/prisma"));
+const prisma_1 = require("../../lib/prisma");
 const registerService = (body) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, email, password } = body;
-        const existingUser = yield prisma_1.default.user.findFirst({
+        const existingUser = yield prisma_1.prisma.user.findFirst({
             where: { email },
         });
         if (existingUser) {
             throw new Error("Email already exist");
         }
         const hashedPassword = yield (0, argon_1.hashPassword)(password);
-        return yield prisma_1.default.user.create({
+        return yield prisma_1.prisma.user.create({
             data: {
                 name,
                 email,
